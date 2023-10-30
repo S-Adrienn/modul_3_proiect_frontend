@@ -1,0 +1,96 @@
+.room-image-container {
+    position: relative;
+  }
+  
+  .room-image {
+    opacity: 1;
+    display: block;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+  }
+  
+  .room-image-width {
+    width: 7rem;
+  }
+  
+  .room-image-height {
+    height: 13rem;
+  }
+  
+  /* Extra small devices (portrait phones) */
+  /* No need for media query here, as it's the default styling. */
+  
+  /* Small devices (landscape phones) */
+  @media (min-width: 600px) {
+    /* styles for sm breakpoint */
+    .room-image-width {
+      width: 8rem;
+    }
+  
+    .room-image-height {
+      height: 13rem;
+    }
+  }
+  
+  /* Medium devices (tablets) */
+  @media (min-width: 960px) {
+    .room-image-width {
+      width: 13rem;
+    }
+  
+    .room-image-height {
+      height: 20rem;
+    }
+    /* styles for md breakpoint */
+  }
+  
+  /* Large devices (desktops, less than 1200px) */
+  @media (min-width: 1280px) {
+    .room-image-width {
+      width: 13rem;
+    }
+  
+    .room-image-height {
+      height: 20rem;
+    }
+    /* styles for lg breakpoint */
+  }
+  
+  /* Extra large devices (large desktops) */
+  @media (min-width: 1920px) {
+    .room-image-width {
+      width: 13rem;
+    }
+  
+    .room-image-height {
+      height: 20rem;
+    }
+    /* styles for xl breakpoint */
+  }
+  
+  .middle {
+    transition: 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .room-image-container:hover .room-image {
+    opacity: 0.3;
+  }
+  
+  .room-image-container:hover .middle {
+    opacity: 1;
+  }
+  
+  .center-flex-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  

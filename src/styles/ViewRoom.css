@@ -1,0 +1,29 @@
+.room-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  .room-image {
+    max-width: 50%;
+    height: auto;
+  }
+  
+  .room-details {
+    /* margin-left: 16px; */
+    max-width: 50%;
+  }
+  
+  /* Telefonképernyőre vonatkozóan példa */
+  @media (max-width: 600px) {
+    .room-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .room-image,
+    .room-details {
+      max-width: 100%;
+    }
+  }
+  
