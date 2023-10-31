@@ -1,0 +1,41 @@
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  input[type="text"] {
+    padding: 8px;
+    width: 300px;
+  }
+  
+  button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+
+
+.reservations-list {
+    margin-top: 20px;
+  }
+  
+  .reservations-list .paper {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reservations-list .paper:hover {
+    background-color: #f5f5f5;
+  }
+  

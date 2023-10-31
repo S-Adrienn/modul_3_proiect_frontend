@@ -10,9 +10,9 @@ const ViewRoom = () => {
   const { room } = useRoomById(roomId);
   //   const [isBooking, setIsBooking] = useState(false);
 
-  // const handleBookRoom = () => {
-  //   window.location.href = "/add-new-reservation";
-  // };
+  const handleSaveRoomPrice = () => {
+    localStorage.setItem("roomPricePerNight", room.roomPricePerNight);
+  };
 
   return room ? (
     <div className="room-container">
@@ -29,8 +29,12 @@ const ViewRoom = () => {
           Price per Night: {room.roomPricePerNight} RON
         </Typography>
         <Link to={`/add-new-reservation/${room.id}`}>
-          <Button variant="contained" color="primary">
-            Foglalás
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSaveRoomPrice}
+          >
+            Make a reservation
           </Button>
         </Link>
       </div>

@@ -12,27 +12,21 @@ export const useAvailableRooms = () => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState(null);
 
   const getAllAvailableRooms = async (checkIn, checkOut) => {
     try {
-        setIsLoading(true);
-        const rooms = await getAvailableRooms(checkIn, checkOut);
-        console.log(checkIn, checkOut)
-        dispatch(setRooms(rooms));
-        navigate("/available-rooms");
-        // setError(null);
+      setIsLoading(true);
+      const rooms = await getAvailableRooms(checkIn, checkOut);
+      console.log(checkIn, checkOut);
+      dispatch(setRooms(rooms));
+      navigate("/available-rooms");
     } catch (e) {
-        console.error(e);
-        dispatch(
-          openSnackbar({text: e, severity: "error"})
-          );
-        // setError(e);
-  
+      console.error(e);
+      dispatch(openSnackbar({ text: e, severity: "error" }));
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
-  return {rooms, isLoading, getAllAvailableRooms};
+  return { rooms, isLoading, getAllAvailableRooms };
 };

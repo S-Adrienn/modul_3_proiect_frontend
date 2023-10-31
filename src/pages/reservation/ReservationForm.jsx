@@ -7,7 +7,7 @@ const ReservationForm = ({
   formTitle,
   onSaveReservation,
   buttonLabel,
-  isReadonly: readOnlyFields,
+  isReadOnly,
 }) => {
   const [dateOfCheckIn, handleDateOfCheckInChange] = useInput(
     reservation.dateOfCheckIn
@@ -16,11 +16,27 @@ const ReservationForm = ({
     reservation.dateOfCheckOut
   );
   const [guestName, handleGuestNameChange] = useInput(reservation.guestName);
+
   const [phoneNumber, handlePhoneNumberChange] = useInput(
     reservation.phoneNumber
   );
-  const [totalPrice, handleTotalPriceChange] = useInput(reservation.totalPrice);
-  //   const [phoneNumber, handlePhoneNumberChange] = useInput(reservation.phoneNumber);
+
+  const calculateTotalPrice = () => {
+    const pricePerNightString = localStorage.getItem("roomPricePerNight");
+    const pricePerNight = parseInt(pricePerNightString);
+
+    const dateOfCheckInTimestamp = Date.parse(dateOfCheckIn);
+    const dateOfCheckOutTimestamp = Date.parse(dateOfCheckOut);
+
+    const millisecondsPerDay = 24 * 60 * 60 * 1000;
+    const daysBetween = Math.ceil(
+      (dateOfCheckOutTimestamp - dateOfCheckInTimestamp) / millisecondsPerDay
+    );
+
+    return daysBetween * pricePerNight;
+  };
+  const calculatedPrice = calculateTotalPrice();
+  const [totalPrice, handleTotalPriceChange] = useInput(calculatedPrice);
 
   const reservations = useSelector(
     (state) => state.reservationReducer.reservation
@@ -41,36 +57,36 @@ const ReservationForm = ({
       <h1>{formTitle}</h1>
       <TextField
         variant="outlined"
-        disabled={readOnlyFields.includes}
+        disabled={isReadOnly.dateOfCheckIn}
         label="Date Of Check In"
         value={dateOfCheckIn}
         onChange={handleDateOfCheckInChange}
       />
       <TextField
         variant="outlined"
-        disabled={readOnlyFields}
+        disabled={isReadOnly.dateOfCheckOut}
         label="Date Of Check Out"
         value={dateOfCheckOut}
         onChange={handleDateOfCheckOutChange}
       />
       <TextField
         variant="outlined"
-        disabled={readOnlyFields}
+        disabled={isReadOnly.guestName}
         label="Guest Name"
         value={guestName}
         onChange={handleGuestNameChange}
       />
       <TextField
         variant="outlined"
-        disabled={readOnlyFields}
+        disabled={isReadOnly.phoneNumber}
         label="Phone Number"
         value={phoneNumber}
         onChange={handlePhoneNumberChange}
       />
       <TextField
         variant="outlined"
-        disabled={readOnlyFields}
-        label="Total Price"
+        disabled={isReadOnly.totalPrice}
+        label="Total Price in RON"
         value={totalPrice}
         onChange={handleTotalPriceChange}
       />

@@ -1,0 +1,35 @@
+.reservation-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  .room-image {
+    max-width: 50%;
+    height: auto;
+  }
+  
+  .reservation-details {
+    max-width: 50%;
+  }
+  
+  /* Telefonképernyőre vonatkozóan példa */
+  @media (max-width: 600px) {
+    .reservation-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .room-image,
+    .reservation-details {
+      max-width: 100%;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  
