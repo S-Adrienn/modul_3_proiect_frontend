@@ -1,18 +1,38 @@
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useReservationById } from "../../hooks/useReservationById";
 import { Button, CircularProgress, Typography } from "@mui/material";
 import "../../styles/ViewReservation.css";
+import DeleteReservation from "./DeleteReservationDialog";
+import { useState } from "react";
+import { deleteReservation } from "../../service/ReservationService";
+import { useDispatch } from "react-redux";
+import { openSnackbar } from "../../stores/snackbarSlice";
 
 const ViewReservation = () => {
   const { reservationId } = useParams();
   const { reservation } = useReservationById(reservationId);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-  const handleDeleteReservation = () => {
-    // Implementáld a törlési műveleteket itt
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleUpdateReservation = () => {
     // Implementáld a foglalás frissítését itt
+  };
+
+  const handleDeleteReservation = async () => {
+    try {
+      await deleteReservation(reservationId);
+      dispatch(openSnackbar({ text: "Reservation deleted successfully" }));
+      navigate("/datepicker");
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        openSnackbar({ text: "Error deleting reservation", severity: "error" })
+      );
+    } finally {
+      setIsDeleteDialogOpen(false);
+    }
   };
 
   return reservation ? (
@@ -37,20 +57,27 @@ const ViewReservation = () => {
           Total Price: {reservation.totalPrice} RON
         </Typography>
         <div className="button-container">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleUpdateReservation}
-          >
-            Update
-          </Button>
+          <Link to={`/reservations/${reservation.id}/update`}>
+            <Button
+              variant="contained"
+              color="primary"
+              // onClick={handleUpdateReservation}
+            >
+              Update
+            </Button>
+          </Link>
           <Button
             variant="contained"
             color="secondary"
-            onClick={handleDeleteReservation}
+            onClick={() => setIsDeleteDialogOpen(true)}
           >
             Delete
           </Button>
+          <DeleteReservation
+            isOpen={isDeleteDialogOpen}
+            onClose={() => setIsDeleteDialogOpen(false)}
+            onDelete={handleDeleteReservation}
+          />
         </div>
       </div>
     </div>

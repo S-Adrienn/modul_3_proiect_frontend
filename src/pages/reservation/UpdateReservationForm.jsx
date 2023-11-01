@@ -1,8 +1,10 @@
 import { Box, TextField, Button } from "@mui/material";
 import { useInput } from "../../hooks/useInput";
 import { useSelector } from "react-redux";
+import { getPricePerNightByRoomId } from "../../service/RoomService";
+import { useEffect, useState } from "react";
 
-const ReservationForm = ({
+const UpdateReservationForm = ({
   reservation,
   formTitle,
   onSaveReservation,
@@ -21,10 +23,19 @@ const ReservationForm = ({
     reservation.phoneNumber
   );
 
-  const calculateTotalPrice = () => {
-    const pricePerNightString = localStorage.getItem("roomPricePerNight");
-    const pricePerNight = parseInt(pricePerNightString);
+  const [pricePerNight, setPricePerNight] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
+  useEffect(() => {
+    getPricePerNightByRoomId(reservation.roomId)
+      .then((price) => setPricePerNight(price))
+      .catch((error) => {
+        console.error("error", error);
+      });
+  }, [reservation.roomId]);
+
+  // calculate the total price
+  useEffect(() => {
     const dateOfCheckInTimestamp = Date.parse(dateOfCheckIn);
     const dateOfCheckOutTimestamp = Date.parse(dateOfCheckOut);
 
@@ -32,16 +43,13 @@ const ReservationForm = ({
     const daysBetween = Math.ceil(
       (dateOfCheckOutTimestamp - dateOfCheckInTimestamp) / millisecondsPerDay
     );
-
-    return daysBetween * pricePerNight;
-  };
-  const calculatedPrice = calculateTotalPrice();
-  const [totalPrice, handleTotalPriceChange] = useInput(calculatedPrice);
+    const calculatedPrice = daysBetween * pricePerNight;
+    setTotalPrice(calculatedPrice);
+  }, [dateOfCheckIn, dateOfCheckOut, pricePerNight]);
 
   const reservations = useSelector(
     (state) => state.reservationReducer.reservation
   );
-  console.log(reservations);
 
   return (
     <Box
@@ -57,38 +65,39 @@ const ReservationForm = ({
       <h1>{formTitle}</h1>
       <TextField
         variant="outlined"
-        disabled={isReadOnly.dateOfCheckIn}
         label="Date Of Check In"
         value={dateOfCheckIn}
         onChange={handleDateOfCheckInChange}
       />
       <TextField
         variant="outlined"
-        disabled={isReadOnly.dateOfCheckOut}
         label="Date Of Check Out"
         value={dateOfCheckOut}
         onChange={handleDateOfCheckOutChange}
       />
       <TextField
         variant="outlined"
-        disabled={isReadOnly.guestName}
         label="Guest Name"
         value={guestName}
         onChange={handleGuestNameChange}
       />
       <TextField
         variant="outlined"
-        disabled={isReadOnly.phoneNumber}
         label="Phone Number"
         value={phoneNumber}
         onChange={handlePhoneNumberChange}
       />
       <TextField
         variant="outlined"
-        disabled={isReadOnly.totalPrice}
+        disabled={isReadOnly}
+        label="Price/night in RON"
+        value={pricePerNight}
+      />
+      <TextField
+        variant="outlined"
+        disabled={isReadOnly}
         label="Total Price in RON"
         value={totalPrice}
-        onChange={handleTotalPriceChange}
       />
       {!!buttonLabel && (
         <Button
@@ -113,4 +122,4 @@ const ReservationForm = ({
   );
 };
 
-export default ReservationForm;
+export default UpdateReservationForm;

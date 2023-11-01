@@ -36,3 +36,20 @@ export const getReservationById = async (id) => {
   const { data } = await axiosInstance.get(`/reservations/${id}`);
   return data;
 };
+
+export const deleteReservation = async (id) => {
+  const { data } = await axiosInstance.delete(`/reservations/${id}`);
+  return data;
+};
+
+export const putReservation = async (id, reservation) => {
+  try {
+    const { data } = await axiosInstance.put(
+      `/reservations/${id}`,
+      reservation
+    );
+    return data;
+  } catch (error) {
+    return Promise.reject(error.response?.data?.message || "Unknown error");
+  }
+};

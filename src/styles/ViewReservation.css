@@ -13,7 +13,7 @@
     max-width: 50%;
   }
   
-  /* Telefonképernyőre vonatkozóan példa */
+  /*phone */
   @media (max-width: 600px) {
     .reservation-container {
       flex-direction: column;

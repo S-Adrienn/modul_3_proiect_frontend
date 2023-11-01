@@ -10,6 +10,7 @@ import ViewRoom from "./pages/room/ViewRoom";
 import CreateReservation from "./pages/reservation/CreateReservation";
 import MyReservations from "./pages/reservation/MyReservations";
 import ViewReservation from "./pages/reservation/ViewReservation";
+import UpdateReservation from "./pages/reservation/UpdateReservation";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       { path: "/add-new-reservation/:roomId", element: <CreateReservation /> },
       { path: "/my-reservations", element: <MyReservations /> },
       { path: "/reservations/:reservationId", element: <ViewReservation /> },
+      {
+        path: "/reservations/:reservationId/update",
+        element: <UpdateReservation />,
+      },
     ],
   },
 ]);

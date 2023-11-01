@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { postReservation } from "../../service/ReservationService";
-import ReservationForm from "./ReservationForm";
+import CreateReservationForm from "./CreateReservationForm";
 import { openSnackbar } from "../../stores/snackbarSlice";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -53,7 +53,7 @@ const CreateReservation = () => {
   };
 
   return (
-    <ReservationForm
+    <CreateReservationForm
       formTitle="Add reservation"
       reservation={initialReservation}
       buttonLabel="Add"
