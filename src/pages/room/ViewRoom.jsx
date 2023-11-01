@@ -15,13 +15,13 @@ const ViewRoom = () => {
   };
 
   return room ? (
-    <div className="room-container">
+    <div className="view-room-container">
       <img
         src={`../../images/${room.id}.jpg`}
         alt={`Room ${room.id}`}
-        className="room-image"
+        className="view-room-image"
       />
-      <div className="room-details">
+      <div className="view-room-details">
         <Typography variant="h4">
           Number of Beds: {room.numberOfBeds}
         </Typography>

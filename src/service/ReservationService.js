@@ -17,8 +17,15 @@ export const getAvailableRooms = async (dateOfCheckIn, dateOfCheckOut) => {
 };
 
 export const postReservation = async (reservation) => {
-  const { data } = await axiosInstance.post("/reservations", reservation);
-  return data;
+  try {
+    const { data } = await axiosInstance.post("/reservations", reservation);
+    return data;
+  } catch (error) {
+    const errorMessage = error.response.data.errors.find(
+      (error) => error.defaultMessage
+    );
+    return Promise.reject(errorMessage.defaultMessage || "Unknown error");
+  }
 };
 
 export const getReservationsByGuestName = async (guestName) => {
@@ -50,6 +57,9 @@ export const putReservation = async (id, reservation) => {
     );
     return data;
   } catch (error) {
-    return Promise.reject(error.response?.data?.message || "Unknown error");
+    const errorMessage = error.response.data.errors.find(
+      (error) => error.defaultMessage
+    );
+    return Promise.reject(errorMessage.defaultMessage || "Unknown error");
   }
 };

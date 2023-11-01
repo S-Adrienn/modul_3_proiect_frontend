@@ -3,6 +3,7 @@ import { useInput } from "../../hooks/useInput";
 import { useSelector } from "react-redux";
 import { getPricePerNightByRoomId } from "../../service/RoomService";
 import { useEffect, useState } from "react";
+import ValidationTextField from "../../components/ValidationTextField";
 
 const UpdateReservationForm = ({
   reservation,
@@ -11,17 +12,25 @@ const UpdateReservationForm = ({
   buttonLabel,
   isReadOnly,
 }) => {
-  const [dateOfCheckIn, handleDateOfCheckInChange] = useInput(
-    reservation.dateOfCheckIn
-  );
-  const [dateOfCheckOut, handleDateOfCheckOutChange] = useInput(
+  // const [dateOfCheckIn, handleDateOfCheckInChange] = useInput(
+  //   reservation.dateOfCheckIn
+  // );
+  // const [dateOfCheckOut, handleDateOfCheckOutChange] = useInput(
+  //   reservation.dateOfCheckOut
+  // );
+  // const [guestName, handleGuestNameChange] = useInput(reservation.guestName);
+
+  // const [phoneNumber, handlePhoneNumberChange] = useInput(
+  //   reservation.phoneNumber
+  // );
+
+  // fields with validation
+  const [dateOfCheckIn, setDateOfCheckIn] = useState(reservation.dateOfCheckIn);
+  const [dateOfCheckOut, setDateOfCheckOut] = useState(
     reservation.dateOfCheckOut
   );
-  const [guestName, handleGuestNameChange] = useInput(reservation.guestName);
-
-  const [phoneNumber, handlePhoneNumberChange] = useInput(
-    reservation.phoneNumber
-  );
+  const [guestName, setGuestName] = useState(reservation.guestName);
+  const [phoneNumber, setPhoneNumber] = useState(reservation.phoneNumber);
 
   const [pricePerNight, setPricePerNight] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -63,29 +72,37 @@ const UpdateReservationForm = ({
       }}
     >
       <h1>{formTitle}</h1>
-      <TextField
-        variant="outlined"
+      <ValidationTextField
         label="Date Of Check In"
         value={dateOfCheckIn}
-        onChange={handleDateOfCheckInChange}
+        onChange={setDateOfCheckIn}
+        pattern="^\d{4}-\d{2}-\d{2}$"
+        errorMessage="Must be in yyyy-mm-dd format"
+        isRequired={true} //required field
       />
-      <TextField
-        variant="outlined"
+      <ValidationTextField
         label="Date Of Check Out"
         value={dateOfCheckOut}
-        onChange={handleDateOfCheckOutChange}
+        onChange={setDateOfCheckOut}
+        pattern="^\d{4}-\d{2}-\d{2}$"
+        errorMessage="Must be in yyyy-mm-dd format"
+        isRequired={true}
       />
-      <TextField
-        variant="outlined"
+      <ValidationTextField
         label="Guest Name"
         value={guestName}
-        onChange={handleGuestNameChange}
+        onChange={setGuestName}
+        pattern="^[A-Za-z -]+$"
+        errorMessage="Only letters, spaces, and hyphens are allowed"
+        isRequired={true} //required field
       />
-      <TextField
-        variant="outlined"
+      <ValidationTextField
         label="Phone Number"
         value={phoneNumber}
-        onChange={handlePhoneNumberChange}
+        onChange={setPhoneNumber}
+        pattern="^[0-9]{10}$"
+        errorMessage="Must be a 10-digit number"
+        isRequired={true} // r.f.
       />
       <TextField
         variant="outlined"

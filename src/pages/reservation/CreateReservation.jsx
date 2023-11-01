@@ -42,7 +42,7 @@ const CreateReservation = () => {
       navigate("/my-reservations");
     } catch (error) {
       console.error(error);
-    } finally {
+      dispatch(openSnackbar({ text: error, severity: "warning" }));
     }
   };
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import CircleBackgroundIcon from "../../components/CircleBackgroundIcon";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import "../../styles/RoomsList.css";
 
 export default function RoomItem({ room, onGetRooms }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +45,7 @@ export default function RoomItem({ room, onGetRooms }) {
           className="middle"
         >
           <Link to={`/rooms/${room.id}`}>
-            <CircleBackgroundIcon icon={VisibilityIcon} color="white"/>
+            <CircleBackgroundIcon icon={VisibilityIcon} color="white" />
           </Link>
         </Stack>
       </div>
