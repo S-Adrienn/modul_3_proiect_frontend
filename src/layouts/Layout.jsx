@@ -1,11 +1,10 @@
-import { useState } from 'react';
-import AppHeader from './AppHeader';
-import MainView from './MainView';
-import MenuDrawer from './MenuDrawer';
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/system';
+import { useState } from "react";
+import AppHeader from "./AppHeader";
+import MainView from "./MainView";
+import MenuDrawer from "./MenuDrawer";
+import Grid from "@mui/material/Grid";
+import { styled } from "@mui/system";
 import AppSnackbar from "../components/AppSnackbar";
-
 
 function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,7 +15,7 @@ function Layout() {
 
   return (
     <Grid container spacing={2}>
-      <AppSnackbar/>
+      <AppSnackbar />
       <Grid item xs={12}>
         <AppHeader onMenuIconClick={toggleMenu} />
       </Grid>

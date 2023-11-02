@@ -1,9 +1,9 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
 
 function MainView() {
   return (
     <div>
-      <Outlet /> {/* Az aloldalak itt jelennek meg */}
+      <Outlet />
     </div>
   );
 }

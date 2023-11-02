@@ -38,7 +38,7 @@ const CreateReservation = () => {
 
     try {
       await postReservation(reservation);
-      dispatch(openSnackbar({ text: "Reservation added successfully" }));
+      dispatch(openSnackbar({ text: "Reservation added successfully!" }));
       navigate("/my-reservations");
     } catch (error) {
       console.error(error);

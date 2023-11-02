@@ -16,10 +16,6 @@ const ViewReservation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleUpdateReservation = () => {
-    // Implementáld a foglalás frissítését itt
-  };
-
   const handleDeleteReservation = async () => {
     try {
       await deleteReservation(reservationId);
@@ -61,7 +57,12 @@ const ViewReservation = () => {
             <Button
               variant="contained"
               color="primary"
-              // onClick={handleUpdateReservation}
+              sx={{
+                backgroundColor: "#B88B4A",
+                "&:hover": {
+                  backgroundColor: "#DDCA7D",
+                },
+              }}
             >
               Update
             </Button>
@@ -70,6 +71,12 @@ const ViewReservation = () => {
             variant="contained"
             color="secondary"
             onClick={() => setIsDeleteDialogOpen(true)}
+            sx={{
+              backgroundColor: "#EF6461",
+              "&:hover": {
+                backgroundColor: "#DDCA7D",
+              },
+            }}
           >
             Delete
           </Button>

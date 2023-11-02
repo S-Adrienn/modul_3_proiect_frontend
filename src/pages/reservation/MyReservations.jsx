@@ -9,7 +9,6 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
-// import "../../styles/MyReservation.css";
 
 const ReservationSearch = () => {
   const [searchedName, setSearchedName] = useState("");
@@ -54,6 +53,12 @@ const ReservationSearch = () => {
             color="primary"
             onClick={handleSearch}
             fullWidth
+            sx={{
+              backgroundColor: "#B88B4A",
+              "&:hover": {
+                backgroundColor: "#DDCA7D",
+              },
+            }}
           >
             Search
           </Button>

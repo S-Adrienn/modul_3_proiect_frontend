@@ -6,6 +6,24 @@ import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { ListItemButton } from "@mui/material";
 import { Link } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+
+const StyledDrawer = styled(Drawer)(({ theme }) => ({
+  "& .MuiDrawer-paper": {
+    width: "250px",
+    background: "#D7BE82",
+  },
+}));
+
+const StyledListItemText = styled(ListItemText)({
+  color: "#515A47",
+});
+
+const StyledListItem = styled(ListItem)({
+  "&:hover": {
+    background: "#B3A394",
+  },
+});
 
 const MenuDrawer = ({ open, onClose }) => {
   const menuItems = [
@@ -14,7 +32,7 @@ const MenuDrawer = ({ open, onClose }) => {
   ];
 
   return (
-    <Drawer anchor="left" open={open} onClose={onClose}>
+    <StyledDrawer anchor="left" open={open} onClose={onClose}>
       <div className="drawer-header">
         <IconButton onClick={onClose}>
           <ChevronLeftIcon />
@@ -22,16 +40,14 @@ const MenuDrawer = ({ open, onClose }) => {
       </div>
       <List>
         {menuItems.map(({ text, path }) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <Link to={path}>
-                <ListItemText primary={text} />
-              </Link>
+          <StyledListItem key={text} disablePadding>
+            <ListItemButton component={Link} to={path}>
+              <StyledListItemText primary={text} />
             </ListItemButton>
-          </ListItem>
+          </StyledListItem>
         ))}
       </List>
-    </Drawer>
+    </StyledDrawer>
   );
 };
 

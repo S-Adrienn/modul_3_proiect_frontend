@@ -9,13 +9,12 @@ import { useDispatch } from "react-redux";
 const UpdateReservation = () => {
   const { reservationId } = useParams();
   const { reservation } = useReservationById(reservationId);
-  //   const { roomId } = reservation;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleCancelClick = () => {
-    navigate(`/reservations/${reservation.id}`); //ez nem biztos jo
+    navigate(`/reservations/${reservation.id}`);
   };
 
   const handleSaveReservation = async (
@@ -36,6 +35,7 @@ const UpdateReservation = () => {
 
     try {
       await putReservation(reservationId, reservationReq);
+      dispatch(openSnackbar({ text: "Reservation updated successfully!" }));
     } catch (error) {
       console.error(error);
       dispatch(openSnackbar({ text: error, severity: "warning" }));
@@ -46,7 +46,6 @@ const UpdateReservation = () => {
 
   return reservation ? (
     <div>
-      Edit reservation with id: {reservationId}
       <UpdateReservationForm
         formTitle="Update reservation"
         reservation={reservation}
@@ -57,7 +56,7 @@ const UpdateReservation = () => {
       <Button
         variant="outlined"
         onClick={handleCancelClick}
-        sx={{ mt: "16px" }}
+        sx={{ mt: "16px", borderColor: "#B88B4A", color: "#B88B4A" }}
       >
         Cancel
       </Button>

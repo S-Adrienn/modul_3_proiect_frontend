@@ -28,7 +28,8 @@ const DatePickerLabel = styled("div")({
 });
 
 function ReservationDatePicker() {
-  const { checkIn, checkOut, handleCheckInChange, handleCheckOutChange } = useDateSelection();
+  const { checkIn, checkOut, handleCheckInChange, handleCheckOutChange } =
+    useDateSelection();
   const { getAllAvailableRooms } = useAvailableRooms();
 
   function formatDateToApiFormat(date) {
@@ -79,7 +80,17 @@ function ReservationDatePicker() {
           />
         </LocalizationProvider>
       </DatePickerContainer>
-      <Button variant="contained" color="primary" onClick={handleSendDates}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSendDates}
+        sx={{
+          backgroundColor: "#B88B4A",
+          "&:hover": {
+            backgroundColor: "#DDCA7D",
+          },
+        }}
+      >
         Send dates
       </Button>
     </ViewStyled>

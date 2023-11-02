@@ -108,6 +108,10 @@ const ReservationForm = ({
           }
           sx={{
             maxWidth: "100px",
+            backgroundColor: "#B88B4A",
+            "&:hover": {
+              backgroundColor: "#DDCA7D",
+            },
           }}
         >
           {buttonLabel}

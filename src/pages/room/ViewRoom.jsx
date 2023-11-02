@@ -3,12 +3,10 @@ import { useRoomById } from "../../hooks/useRoomById";
 import { CircularProgress, Button, Typography } from "@mui/material";
 import "../../styles/ViewRoom.css";
 import { Link } from "react-router-dom";
-// import { useState } from "react";
 
 const ViewRoom = () => {
   const { roomId } = useParams();
   const { room } = useRoomById(roomId);
-  //   const [isBooking, setIsBooking] = useState(false);
 
   const handleSaveRoomPrice = () => {
     localStorage.setItem("roomPricePerNight", room.roomPricePerNight);
@@ -33,6 +31,12 @@ const ViewRoom = () => {
             variant="contained"
             color="primary"
             onClick={handleSaveRoomPrice}
+            sx={{
+              backgroundColor: "#B88B4A",
+              "&:hover": {
+                backgroundColor: "#DDCA7D",
+              },
+            }}
           >
             Make a reservation
           </Button>

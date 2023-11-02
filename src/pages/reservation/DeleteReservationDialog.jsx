@@ -19,8 +19,23 @@ const DeleteReservation = ({ isOpen, onClose, onDelete }) => {
         <Typography>{`Are you sure you want to delete this reservation?`}</Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleDelete} variant="contained" color="primary">
+        <Button
+          onClick={onClose}
+          sx={{ borderColor: "#B88B4A", color: "#B88B4A" }}
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleDelete}
+          variant="contained"
+          color="primary"
+          sx={{
+            backgroundColor: "#EF6461",
+            "&:hover": {
+              backgroundColor: "#DDCA7D",
+            },
+          }}
+        >
           Delete
         </Button>
       </DialogActions>

@@ -1,5 +1,4 @@
 import { Box, TextField, Button } from "@mui/material";
-import { useInput } from "../../hooks/useInput";
 import { useSelector } from "react-redux";
 import { getPricePerNightByRoomId } from "../../service/RoomService";
 import { useEffect, useState } from "react";
@@ -130,6 +129,10 @@ const UpdateReservationForm = ({
           }
           sx={{
             maxWidth: "100px",
+            backgroundColor: "#B88B4A",
+            "&:hover": {
+              backgroundColor: "#DDCA7D",
+            },
           }}
         >
           {buttonLabel}
